@@ -1,0 +1,37 @@
+{% include "public/head_file.html"%}
+    {% load static %}
+    <h1>Personal Info</h1>
+    <div class="container">
+        <div class="basic_info">
+            <label for="name">Name: </label>
+            <div class="personal_info" name="name">{{ person.first_name }}</div>
+            <label for="sur_name">Surname: </label>
+            <div class="personal_info" name="sur_name">{{ person.sur_name }}</div>
+            <label for="b_day">date of birth: </label>
+            <div class="personal_info" name="b_day">{{ person.birth_date }}</div>
+        </div>
+        <div class="contact_info">
+            <label for="contacts">contacts: </label>
+            <ul class="personal_info contact_area" name="contacts">
+                {% for title, address in person.contacts.items %}
+                    <label class="contact_title" for="{{title}}">{{title}}</label>
+                    <li class="contact_address" name="{{title}}">{{address}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="lower_part">
+            <div class="photo_area">
+                <label for="photo"><h3>Photo: </h3></label>
+                <img src="{% static person.photo.url %}" alt="user photo" />
+            </div>
+            <div class="bio_area_home">
+                <label for="bio"><h3>Bio: </h3></label>
+                <textarea class="personal_info bio_area" name="bio" readonly="readonly">{{ person.bio }}</textarea>
+            </div>
+        </div>
+
+
+        <hr />
+        <a href="{% url 'request_page'%}">Requests page</a> 
+    </div>
+{% include "public/footer_file.html"%}

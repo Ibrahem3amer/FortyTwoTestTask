@@ -1,0 +1,36 @@
+{% include "public/head_file.html"%}
+    <h1>Edit personal Info</h1>
+    <div class="container">
+        <div id="results">
+            Please enter valid data. 
+        </div>
+        <form action="{% url 'edit_personal_data' %}" method="POST" id="post-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="basic_info">
+                <h3><label for="name">Name: </label></h3>
+                <div class="personal_info"><input type="text" name="first_name" id="first_name" value="{{ person.first_name }}" /></div>
+                <h3><label for="sur_name">Surname: </label></h3>
+                <div class="personal_info"><input type="text" name="sur_name" id="sur_name" value="{{ person.sur_name }}" /></div>
+                <h3><label for="birth_date">date of birth: </label></h3>
+                <div class="personal_info"><input type="date" name="birth_date" id="birth_date" value="{{ person.birth_date }}" /></div>
+                <h3><label for="photo">photo: </label></h3>
+                <div class="personal_info"><input type="file" name="photo" accept="image/*" id="photo" onchange="handleFiles(this.files)"/>
+                    <div id="preview"></div>
+                </div>
+            </div>
+            <div class="contact_info">
+                <h3><label for="contacts">contacts: </label></h3>
+                <textarea class="personal contact_area" name="contacts" id="contacts">{{ person.contacts }}</textarea>
+            </div>
+            <div class="bio_info">
+                <h3><label for="bio">bio: </label></h3>
+                <textarea class="personal_info bio_area" name="bio" id="bio">{{ person.bio }}</textarea>
+            </div>
+            <input type="submit" name="save" id="submit">
+        </form>
+
+
+        <hr />
+        <a href="{% url 'request_page'%}">Requests page</a> 
+    </div>
+{% include "public/footer_file.html"%}
