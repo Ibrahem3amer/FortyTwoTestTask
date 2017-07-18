@@ -13,6 +13,7 @@ def homepage_visitor(request):
 
     # In case you want to user fixture-based data.
     person          = get_object_or_404(Person, pk = 1)
-    person.contacts = json.loads(person.contacts)
+    person_contacts = person.contacts.replace('u','')
+    person.contacts = json.loads(person_contacts.replace("'",'"'))
     
     return render(request, 'home.html', {'person': person})

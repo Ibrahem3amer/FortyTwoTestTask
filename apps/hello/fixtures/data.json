@@ -1,13 +1,13 @@
 [
   {
-    "model": "test_assignment.Person",
+    "model": "hello.Person",
     "pk": 1,
     "fields": {
       "first_name": "Ibrahem",
       "sur_name": "Amer",
       "birth_date": "17/12/1995",
       "bio": "Computer science student, Geeky activist, Ambitious entrepreneur. Interested in many core sciences like: Algorithms, Data Structures, Operating Systems, Machine Learning, and Design Patterns. Looking forward to pushing all effective technologies to my own stack of knowledge. Im a man of challenges, I love them and they seem to do so. I like the idea of spreading knowledge and facilitating sciences, Im working on educational project that aims to operate with these matters. I love innovation and creation and thats why I decided to be a programmer, hoping that I could have this magic wand that creates and shapes the modern world.",
-      "contacts": {"email": "ibrahem3amer@hotmail.com", "Jabber": "ibrahem3amer", "Skype": "ebrahem3amer"}
+      "contacts": {"email": "ibrahem3amer@hotmail.com", "Jabber": "ibrahem3amer", "Skype": "ebrahem3amer"},
     }
   },
   {
