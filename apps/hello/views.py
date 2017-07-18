@@ -1,9 +1,6 @@
 import json
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.management import call_command
-from django.http import HttpResponse
-from hello.models import Person, Request, RequestHandler
-from hello.forms import EditPersonForm
+from hello.models import Person
 
 
 def homepage_visitor(request):
