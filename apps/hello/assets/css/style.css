@@ -1,0 +1,97 @@
+body{
+    background-color: #95a5a6;
+}
+
+.container{
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    width: 70%;
+}
+
+.basic_info{
+    width: 50%;
+    float: left;
+}
+
+h1{
+    color: #f1c40f;
+}
+
+label{
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    color: #2c3e50;
+}
+
+.personal_info{
+    margin-bottom: 25px;
+}
+
+.lower_part{
+    width: 100%;
+}
+
+.bio_area_home{
+    width: 50%;
+    padding: 10px;
+    float: right;
+
+}
+
+.bio_area_home textarea{
+    width: 100%;
+    height: 200px;
+}
+
+.bio_area label{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.photo_area{
+    width: 40%;
+    height: auto;
+    float: left;
+    margin:20px;
+}
+
+.photo_area img{
+    background-color: #000;
+}
+
+.contact_area{
+    padding: 10px;
+    width: auto;
+}
+
+.contact_title{
+    font-weight: normal;
+    font-style: italic;
+}
+
+.contact_address{
+    margin-bottom: 20px;
+}
+
+hr{
+    width: 100%;
+    clear: both;
+}
+
+#results{
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px;
+    width: 50%;
+    height: auto;
+    background-color: #c0392b;
+    display: none;
+}
+
+#preview img{
+    width: 70%;
+    height: 70%;
+}
