@@ -1,4 +1,4 @@
-from hello.models import Person
+from hello.models import Person, Request
 from django.test import TestCase
 
 
@@ -64,3 +64,45 @@ class PersonTest(TestCase):
 
         # Assert test
         self.assertIn('test.jpg', db_result.photo.path)
+
+
+class RequestTest(TestCase):
+
+    def test_create_new_request(self):
+        """Creates new test with vaild data."""
+
+        # Setup test
+        data = {
+            'scheme': 'http',
+            'body': 'this is body',
+            'path': 'request path',
+            'method': 'GET',
+            'date': '19-7-2017'
+        }
+        Request.objects.create(
+            scheme=data['scheme'],
+            body=data['body'],
+            path=data['path'],
+            method=data['method'],
+            date=data['date']
+        )
+
+        # Exercise test
+        requests_in_db = Request.objects.all().count()
+
+        # Assert test
+        self.assertTrue(requests_in_db > 0)
+
+    def test_create_new_request_with_empty_fields(self):
+        """Tests that default data is being added."""
+
+        # Setup test
+        Request.objects.create()
+
+        # Exercise test
+        requests_in_db = Request.objects.all().count()
+        request = Request.objects.first()
+
+        # Assert test
+        self.assertTrue(requests_in_db > 0)
+        self.assertEqual('N/A', request.scheme)

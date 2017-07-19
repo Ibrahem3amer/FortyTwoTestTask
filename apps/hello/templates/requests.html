@@ -2,15 +2,19 @@
     <h1>Latest 10 requests</h1>
     <small>Requests to this page are not counted in unread requests.</small>
     <ul>
-        <li> 
-            <h3>Request 1</h3>
-            <ul>
-                <li>request scheme: http</li>
-                <li>request body: request body</li>
-                <li>request path: /requests</li>
-                <li>request method: GET</li>
-                <li>request date: 19/07/2017</li>
-            </ul>
-        </li>
+    {% if requests %}
+        {% for request in requests %}
+            <li> 
+                <h3>Request {{ forloop.counter }}</h3>
+                <ul>
+                    <li>request scheme: {{ request.scheme }}</li>
+                    <li>request body: {{ request.body }}</li>
+                    <li>request path: {{ request.path }}</li>
+                    <li>request method: {{ request.method }}</li>
+                    <li>request date: {{ request.date }}</li>
+                </ul>
+            </li>
+        {% endfor %}
+    {% endif %}
     </ul>
 {% include "public/footer_file.html"%}
