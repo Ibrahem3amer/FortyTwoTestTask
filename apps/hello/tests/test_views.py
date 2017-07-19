@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from hello.models import Person
+from hello.models import Person, Request, RequestHandler
 
 
 class user_vists_pages(TestCase):
@@ -35,7 +35,7 @@ class RequestTest(TestCase):
 
     def test_add_new_request_through_view(self):
         """Tests that middleware saves incoming request."""
-        
+
         # Setup test
         self.client.get(reverse('visitor_homepage'))
 
@@ -44,7 +44,6 @@ class RequestTest(TestCase):
 
         # Assert test
         self.assertTrue(requests_in_db > 0)
-
 
     def test_add_more_than_one_request(self):
         """Tests that middleware saves incoming multiple request."""
@@ -58,7 +57,6 @@ class RequestTest(TestCase):
 
         # Assert test
         self.assertTrue(requests_in_db > 4)
-
 
     def test_unread_requests(self):
         """Tests that middleware increments unread requests."""
@@ -74,16 +72,15 @@ class RequestTest(TestCase):
         self.assertTrue(requests_in_db > 0)
         self.assertTrue(n > 0)
 
-
     def test_read_the_unread(self):
-        """Tests that middleware updated unread requests when user reads them."""
-        
+        """Tests that middleware updated unread requests."""
+
         # Setup test
         self.client.get(reverse('visitor_homepage'))
 
         # Exercise test
         n = RequestHandler.get_unread_requests()
-        self.client.get(reverse('request_page'))
+        self.client.get(reverse('requests'))
         new_n = RequestHandler.get_unread_requests()
 
         # Assert test

@@ -1,5 +1,5 @@
 {% include "public/head_file.html"%}
-    <h1>Latest 10 requests</h1>
+    <h1>{% if n %} {{ n }} unread request(s) | {% endif%} Latest 10 requests</h1>
     <small>Requests to this page are not counted in unread requests.</small>
     <ul>
     {% if requests %}

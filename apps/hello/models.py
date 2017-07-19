@@ -49,7 +49,6 @@ class RequestHandler(object):
         if 'requests' not in request.path:
             cls.increment_unread_requests()
         http_request = Request.objects.create(
-                scheme=request.scheme,
                 body=request.body,
                 path=request.path,
                 method=request.method,
