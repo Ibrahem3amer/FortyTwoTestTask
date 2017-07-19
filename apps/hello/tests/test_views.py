@@ -6,7 +6,7 @@ from hello.models import Person
 class user_vists_pages(TestCase):
     """Contains cases when user visits different pages."""
 
-    def test_user_find_homepage(self):
+    def test_user_finds_homepage(self):
         """Tests homepage loading when user hits '/'"""
 
         # Setup test
@@ -18,3 +18,14 @@ class user_vists_pages(TestCase):
         # Assert test
         self.assertEqual(request.status_code, 200)
         self.assertTemplateUsed(request, 'home.html')
+
+    def test_user_finds_requests_view(self):
+        """Tests that user can find requests page."""
+        # Setup test
+        request = reverse('requests')
+        request = self.client.get(request)
+
+        # Exercise test
+        # Assert test
+        self.assertEqual(request.status_code, 200)
+        self.assertTemplateUsed(request, 'requests.html')

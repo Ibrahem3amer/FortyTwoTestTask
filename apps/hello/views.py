@@ -11,3 +11,10 @@ def homepage_visitor(request):
     person.contacts = json.loads(person_contacts.replace("'", '"'))
 
     return render(request, 'home.html', {'person': person})
+
+
+def latest_requests(request):
+    """calls latest 10 requests in db, display template to user."""
+
+    # Display template to user.
+    return render(request, 'requests.html')
