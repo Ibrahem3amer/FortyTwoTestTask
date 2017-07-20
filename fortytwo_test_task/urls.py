@@ -12,6 +12,7 @@ urlpatterns = patterns(
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^requests/', views42cc.latest_requests, name="requests"),
+    url(r'^edit_info/', views42cc.edit_info, name="edit_personal_data"),
     url(r'^', views42cc.homepage_visitor, name="visitor_homepage"),
 
 )

@@ -31,3 +31,12 @@ def latest_requests(request):
             'requests': latest_ten_reqeusts
             }
     )
+
+
+def edit_info(request):
+    """
+    GET request -> displays fillable form to user.
+    POST request -> processes form, redirects user to homepage.
+    """
+
+    return render(request, 'edit_data.html')
