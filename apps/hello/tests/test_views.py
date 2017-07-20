@@ -50,17 +50,17 @@ class user_vists_pages(TestCase):
         Person.objects.create(pk=1)
         request = reverse('edit_personal_data')
         data = {
-            'first_name':'Ibrahem',
-            'sur_name':'Amer',
-            'birth_date':'1995-17-12',
-            'bio':'bla bla bla.',
-            'contacts':"email: sdasd /nskype: ebrahem3amer",
+            'first_name': 'Ibrahem',
+            'sur_name': 'Amer',
+            'birth_date': '1995-17-12',
+            'bio': 'bla bla bla.',
+            'contacts': "email: sdasd /nskype: ebrahem3amer",
         }
         request = self.client.post(request, data=data)
 
         # Exercise test
         # Assert test
-        self.assertIn('success', str(request.content))
+        self.assertEqual(request.status_code, 302)
 
 
 class RequestTest(TestCase):

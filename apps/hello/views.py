@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from hello.models import Person, Request, RequestHandler
 
 
@@ -38,5 +38,7 @@ def edit_info(request):
     GET request -> displays fillable form to user.
     POST request -> processes form, redirects user to homepage.
     """
+    if request.method == 'POST':
+        return redirect('visitor_homepage')
 
     return render(request, 'edit_data.html')
