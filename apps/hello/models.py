@@ -1,5 +1,6 @@
 from django.core.validators import RegexValidator
 from django.db import models
+from django.conf import settings
 from PIL import Image
 
 
@@ -21,8 +22,7 @@ class Person(models.Model):
         """Edits photo dimensions to 200*200, Opens, resizes and saves it."""
         size = (200, 200)
         try:
-            static_path = 'test_assignment/static/'
-            photo_name = static_path+person_info.photo.name
+            photo_name = settings.MEDIA_ROOT+person_info.photo.name
             image = Image.open(photo_name)
             image.thumbnail(size, Image.ANTIALIAS)
             image.save(photo_name)
