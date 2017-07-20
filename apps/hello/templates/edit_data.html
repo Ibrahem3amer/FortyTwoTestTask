@@ -5,6 +5,7 @@
             Please enter valid data. 
         </div>
         <form action="{% url 'edit_personal_data' %}" method="POST" id="post-form" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="basic_info">
                 <h3><label for="name">Name: </label></h3>
                 <div class="personal_info"><input type="text" name="first_name" id="first_name" /></div>
@@ -30,6 +31,6 @@
 
 
         <hr />
-        <a href="#">Requests page</a> 
+        <a href="{% url 'requests' %}">Requests page</a>
     </div>
 {% include "public/footer_file.html"%}
