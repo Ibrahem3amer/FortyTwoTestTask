@@ -1,6 +1,7 @@
 import json
 from django.shortcuts import render, get_object_or_404, redirect
 from hello.models import Person, Request, RequestHandler
+from hello.forms import EditPersonForm
 
 
 def homepage_visitor(request):
@@ -10,7 +11,7 @@ def homepage_visitor(request):
     person_contacts = person.contacts.replace('u', '')
     person.contacts = json.loads(person_contacts.replace("'", '"'))
 
-    return render(request, 'home.html', {'person': person})
+    return render(request, 'home.html', {'person': person, 'request': request})
 
 
 def latest_requests(request):
@@ -38,7 +39,18 @@ def edit_info(request):
     GET request -> displays fillable form to user.
     POST request -> processes form, redirects user to homepage.
     """
+    person = Person.objects.first()
+    form = EditPersonForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=person
+    )
     if request.method == 'POST':
-        return redirect('visitor_homepage')
+        if(form.is_valid()):
+            person_info = form.save()
+            # Process user photo.
+            if request.FILES:
+                Person.process_user_photo(person_info)
+            return redirect('visitor_homepage')
 
-    return render(request, 'edit_data.html')
+    return render(request, 'edit_data.html', {'form': form})

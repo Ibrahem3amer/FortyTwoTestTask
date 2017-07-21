@@ -1,4 +1,4 @@
-from hello.models import RequestHandler
+﻿from hello.models import RequestHandler
 
 
 class RequestsMiddleware(object):

@@ -1,7 +1,8 @@
-from django.core.validators import RegexValidator
+﻿from django.core.validators import RegexValidator
 from django.db import models
 from django.conf import settings
 from PIL import Image
+
 
 
 class Person(models.Model):
@@ -12,17 +13,18 @@ class Person(models.Model):
 
     first_name = models.CharField(max_length=100, validators=[name_validator])
     sur_name = models.CharField(max_length=100, validators=[name_validator])
-    bio = models.CharField(max_length=500, default='N/A')
     birth_date = models.CharField(max_length=100, default='N/A')
+    photo = models.ImageField(upload_to='/'.encode('utf-8'), default='no-img.jpg')
     contacts = models.CharField(max_length=200, default='{}')
-    photo = models.ImageField(upload_to='/', default='no-img.jpg')
+    bio = models.CharField(max_length=700, default='N/A')
 
     @classmethod
     def process_user_photo(cls, person_info):
         """Edits photo dimensions to 200*200, Opens, resizes and saves it."""
         size = (200, 200)
         try:
-            photo_name = settings.MEDIA_ROOT+person_info.photo.name
+            photo_name = settings.MEDIA_ROOT+'/'+person_info.photo.name
+            photo_name = photo_name.encode('utf-8')
             image = Image.open(photo_name)
             image.thumbnail(size, Image.ANTIALIAS)
             image.save(photo_name)
@@ -49,7 +51,6 @@ class RequestHandler(object):
         if 'requests' not in request.path:
             cls.increment_unread_requests()
         http_request = Request.objects.create(
-                body=request.body,
                 path=request.path,
                 method=request.method,
             )

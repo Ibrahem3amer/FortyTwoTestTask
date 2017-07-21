@@ -14,13 +14,14 @@ class EditPersonFormTest(TestCase):
             'birth_date': '1995-5-5',
             'bio': 'bla bal bla.',
             'contacts': "email: sdasd /nskype: ebrahem3amer",
-            'photo': 'N/A',
+            'photo': 'test.jpg',
         }
 
         # Exercise test
         form = EditPersonForm(data=data)
 
         # Assert test
+        print(form.errors)
         self.assertTrue(form.is_valid())
 
     def test_edit_fname_with_numbers(self):

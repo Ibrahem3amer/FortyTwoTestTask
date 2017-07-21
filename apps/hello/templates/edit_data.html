@@ -1,30 +1,41 @@
-{% include "public/head_file.html"%}
+﻿{% include "public/head_file.html"%}
     <h1>Edit personal Info</h1>
     <div class="container">
-        <div id="results">
-            Please enter valid data. 
-        </div>
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="results">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="results">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
         <form action="{% url 'edit_personal_data' %}" method="POST" id="post-form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="basic_info">
-                <h3><label for="name">Name: </label></h3>
-                <div class="personal_info"><input type="text" name="first_name" id="first_name" /></div>
-                <h3><label for="sur_name">Surname: </label></h3>
-                <div class="personal_info"><input type="text" name="sur_name" id="sur_name" /></div>
-                <h3><label for="birth_date">date of birth: </label></h3>
-                <div class="personal_info"><input type="date" name="birth_date" id="birth_date" /></div>
-                <h3><label for="photo">photo: </label></h3>
-                <div class="personal_info"><input type="file" name="photo" accept="image/*" id="photo" />
+                <h3><label for="{{ form.first_name.name }}">{{ form.first_name.label }}</label></h3>
+                {{ form.first_name }}
+                <h3><label for="{{ form.sur_name.name }}">{{ form.sur_name.label }}</label></h3>
+                {{ form.sur_name }}
+                <h3><label for="{{ form.birth_date.name }}">{{ form.birth_date.label }}</label></h3>
+                {{ form.birth_date }}
+                <h3><label for="{{ form.photo.name }}">{{ form.photo.label }}</label></h3>
+                <div class="personal_info">{{ form.photo }}
                     <div id="preview"></div>
                 </div>
             </div>
             <div class="contact_info">
-                <h3><label for="contacts">contacts: </label></h3>
-                <textarea class="personal contact_area" name="contacts" id="contacts"></textarea>
+                <h3><label for="{{ form.contacts.name }}">{{ form.contacts.label }}</label></h3>
+                {{ form.contacts }}
             </div>
             <div class="bio_info">
-                <h3><label for="bio">bio: </label></h3>
-                <textarea class="personal_info bio_area" name="bio" id="bio"></textarea>
+                <h3><label for="{{ form.bio.name }}">{{ form.bio.label }}</label></h3>
+                {{ form.bio }}
             </div>
             <input type="submit" name="save" id="submit">
         </form>
@@ -33,4 +44,13 @@
         <hr />
         <a href="{% url 'requests' %}">Requests page</a>
     </div>
+    <script>
+      $(function() {
+        $( ".datepicker" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          yearRange: "1900:2007",
+        });
+      });
+    </script>
 {% include "public/footer_file.html"%}
