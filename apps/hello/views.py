@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from hello.models import Person, Request, RequestHandler
 from hello.forms import EditPersonForm
@@ -54,7 +54,7 @@ def edit_info(request):
                 Person.process_user_photo(person_info)
             response = {}
             response['result'] = 'success'
-            response['user_name'] = person_info.first_name + person_info.sur_name
+            response['user_name'] = person_info.first_name+person_info.sur_name
 
             return HttpResponse(
                 json.dumps(response),
@@ -65,6 +65,5 @@ def edit_info(request):
                 json.dumps({'status': 'failure. cannot save form.'}),
                 content_type="application/json"
             )
-                
 
     return render(request, 'edit_data.html', {'form': form})

@@ -9,9 +9,14 @@ urlpatterns = []
 
 if settings.DEBUG is True:
     # So that it does not conflict with home directory.
-    urlpatterns += patterns('',
-        (r'^uploads/(?P<path>.*)$', 'django.views.static.serve', {
-        'document_root': settings.MEDIA_ROOT}))
+    urlpatterns += patterns(
+        '',
+        (
+            r'^uploads/(?P<path>.*)$',
+            'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT}
+        )
+    )
 
 urlpatterns += patterns(
     '',
@@ -25,5 +30,3 @@ urlpatterns += patterns(
     url(r'^', views42cc.homepage_visitor, name="visitor_homepage"),
 
 )
-
-
