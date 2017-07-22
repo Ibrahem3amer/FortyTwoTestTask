@@ -43,7 +43,7 @@ class user_vists_pages(TestCase):
         self.assertEqual(request.status_code, 200)
         self.assertTemplateUsed(request, 'edit_data.html')
 
-    def test_user_submits_valid_post_request_and_redirected(self):
+    def test_user_submits_valid_post_request(self):
         """Tests view behavior when using POST."""
 
         # Setup test
@@ -52,7 +52,7 @@ class user_vists_pages(TestCase):
         data = {
             'first_name': 'Ibrahem',
             'sur_name': 'Amer',
-            'birth_date': '1995-17-12',
+            'birth_date': '1995-12-17',
             'bio': 'bla bla bla.',
             'contacts': "email: sdasd /nskype: ebrahem3amer",
         }
@@ -60,7 +60,20 @@ class user_vists_pages(TestCase):
 
         # Exercise test
         # Assert test
-        self.assertEqual(request.status_code, 302)
+        self.assertIn('success', str(request.content))
+
+    def test_user_submits_invalid_post_request(self):
+        """Tests view behavior when using POST improbably."""
+
+        # Setup test
+        Person.objects.create(pk=1)
+        request = reverse('edit_personal_data')
+        data = {}
+        request = self.client.post(request, data=data)
+
+        # Exercise test
+        # Assert test
+        self.assertIn('failure', str(request.content))
 
 
 class RequestTest(TestCase):

@@ -14,7 +14,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=100, validators=[name_validator])
     sur_name = models.CharField(max_length=100, validators=[name_validator])
     birth_date = models.CharField(max_length=100, default='N/A')
-    photo = models.ImageField(upload_to='/'.encode('utf-8'), default='no-img.jpg')
+    photo = models.ImageField(upload_to='.'.encode('utf-8'), default='no-img.jpg')
     contacts = models.CharField(max_length=200, default='{}')
     bio = models.CharField(max_length=700, default='N/A')
 
