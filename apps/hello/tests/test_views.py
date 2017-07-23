@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.contrib.auth.models import User
 from hello.models import Person, Request, RequestHandler
 
 
@@ -30,17 +31,32 @@ class user_vists_pages(TestCase):
         self.assertEqual(request.status_code, 200)
         self.assertTemplateUsed(request, 'requests.html')
 
-    def test_user_access_edit_page(self):
-        """Tests that user can access edit info page."""
+    def test_user_access_edit_page_unatuh(self):
+        """Tests that user can not access when unauthed."""
 
         # Setup test
-        Person.objects.create(pk=1)
         request = reverse('edit_personal_data')
         request = self.client.get(request)
 
         # Exercise test
         # Assert test
-        self.assertEqual(request.status_code, 200)
+        self.assertEqual(request.status_code, 203)
+
+    def test_user_access_edit_page_authed(self):
+        """Tests that user can access edit when authed."""
+
+        # Setup test
+        person = Person.objects.create(pk=1)
+        membership = User.objects.create_user(username='admin', password='admin')
+        person.membership = membership
+        person.save()
+        self.client.login(username=membership.username, password=membership.password)
+        request = reverse('edit_personal_data')
+        request = self.client.get(request)
+
+        # Exercise test
+        # Assert test
+        self.assertEqual(request.status_code, 203)
         self.assertTemplateUsed(request, 'edit_data.html')
 
     def test_user_submits_valid_post_request(self):
