@@ -1,4 +1,5 @@
 import json
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from hello.models import Person, Request, RequestHandler
@@ -35,6 +36,7 @@ def latest_requests(request):
     )
 
 
+@login_required()
 def edit_info(request):
     """
     GET request -> displays fillable form to user.

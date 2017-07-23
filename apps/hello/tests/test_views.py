@@ -7,6 +7,18 @@ from hello.models import Person, Request, RequestHandler
 class user_vists_pages(TestCase):
     """Contains cases when user visits different pages."""
 
+    def create_auth(self):
+        """Creates auth settings for test client."""
+        person = Person.objects.create(pk=1)
+        membership = User.objects.create_user(
+            username='admin',
+            password='admin'
+        )
+        membership.save()
+        person.membership = membership
+        person.save()
+        self.client.login(username='admin', password='admin')
+
     def test_user_finds_homepage(self):
         """Tests homepage loading when user hits '/'"""
 
@@ -40,30 +52,26 @@ class user_vists_pages(TestCase):
 
         # Exercise test
         # Assert test
-        self.assertEqual(request.status_code, 203)
+        self.assertEqual(request.status_code, 302)
 
     def test_user_access_edit_page_authed(self):
         """Tests that user can access edit when authed."""
 
         # Setup test
-        person = Person.objects.create(pk=1)
-        membership = User.objects.create_user(username='admin', password='admin')
-        person.membership = membership
-        person.save()
-        self.client.login(username=membership.username, password=membership.password)
+        self.create_auth()
         request = reverse('edit_personal_data')
         request = self.client.get(request)
 
         # Exercise test
         # Assert test
-        self.assertEqual(request.status_code, 203)
+        self.assertEqual(request.status_code, 200)
         self.assertTemplateUsed(request, 'edit_data.html')
 
     def test_user_submits_valid_post_request(self):
         """Tests view behavior when using POST."""
 
         # Setup test
-        Person.objects.create(pk=1)
+        self.create_auth()
         request = reverse('edit_personal_data')
         data = {
             'first_name': 'Ibrahem',
@@ -82,7 +90,7 @@ class user_vists_pages(TestCase):
         """Tests view behavior when using POST improbably."""
 
         # Setup test
-        Person.objects.create(pk=1)
+        self.create_auth()
         request = reverse('edit_personal_data')
         data = {}
         request = self.client.post(request, data=data)

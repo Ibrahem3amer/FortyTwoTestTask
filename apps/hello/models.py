@@ -19,6 +19,12 @@ class Person(models.Model):
     )
     contacts = models.CharField(max_length=200, default='{}')
     bio = models.CharField(max_length=700, default='N/A')
+    membership = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        related_name='person',
+        on_delete=models.CASCADE,
+        null=True
+    )
 
     @classmethod
     def process_user_photo(cls, person_info):
