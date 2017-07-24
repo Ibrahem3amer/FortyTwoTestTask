@@ -33,29 +33,44 @@ label{
     width: 100%;
 }
 
-.bio_area_home{
-    width: 50%;
-    padding: 10px;
+.x_contact_info{
     float: right;
+    width: 50%;
+}
+
+.x_label{
+    float: left;
+    display: block;
+}
+
+.extra_contact_area{
+    margin-top: 40px;
+    padding: 0;
+}
+
+.bio_area_home{
+    width: 40%;
+    display: inline-block;
 
 }
 
 .bio_area_home textarea{
+    padding: 10px;
     width: 100%;
     height: 200px;
 }
 
 .bio_area label{
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
 }
 
 .photo_area{
     width: 40%;
     height: auto;
-    float: left;
-    margin:20px;
+    display: block;
+}
+
+.photo_area label{
+    display: block;
 }
 
 .photo_area img{
