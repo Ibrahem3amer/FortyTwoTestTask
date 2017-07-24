@@ -12,9 +12,11 @@ def homepage_visitor(request):
 
     person = get_object_or_404(Person, pk=1)
     person_contacts = person.contacts.replace('u', '')
-    OrderedDict([('email', 1), ('jabber', 2), ('skype', 3)]) 
-    person.contacts = json.loads(person_contacts.replace("'", '"'), object_pairs_hook=OrderedDict)
-
+    OrderedDict([('email', 1), ('jabber', 2), ('skype', 3)])
+    person.contacts = json.loads(
+        person_contacts.replace("'", '"'),
+        object_pairs_hook=OrderedDict
+    )
 
     return render(request, 'home.html', {'person': person, 'request': request})
 
