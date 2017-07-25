@@ -30,7 +30,8 @@ urlpatterns += patterns(
     url(
         r'^accounts/login/$',
         'django.contrib.auth.views.login',
-        {'template_name': 'hello/login.html'}
+        {'template_name': 'hello/login.html'},
+        name="login"
     ),
     url(r'^', views42cc.homepage_visitor, name="visitor_homepage"),
 

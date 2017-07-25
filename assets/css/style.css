@@ -14,8 +14,24 @@ body{
     float: left;
 }
 
-h1{
+.page_title{
     color: #f1c40f;
+    width: 70%;
+    font-weight: bold;
+    font-size: 32pt;
+    margin-left: 10%;
+}
+
+.login{
+    width: 20%;
+    margin: 0;
+    float: right;
+    margin-right: 20%;
+    margin-top: 2%;
+}
+
+.upper-nav{
+    margin-bottom: 5%;
 }
 
 label{

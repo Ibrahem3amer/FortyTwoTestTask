@@ -1,7 +1,13 @@
 {% include "public/head_file.html"%}
     {% load static %}
-    <h1>Personal Info</h1>
-    <h6 class="personal_info"><a href="{% url 'edit_personal_data' %}">edit you info</a></h6>
+    <div class="upper-nav">
+        <span class="page_title">Personal Info</span>
+        {% if request.user.is_authenticated %}
+            <h6 class="login"><a href="{% url 'edit_personal_data' %}">Edit ({{ request.user.username }})</a></h6>
+        {% else %}
+            <h6 class="login"><a href="{% url 'login' %}">login</a></h6>
+        {% endif %}
+    </div>
     <div class="container">
         <div class="basic_info">
             <label for="name">Name: </label>
@@ -10,6 +16,10 @@
             <div class="personal_info" name="sur_name">{{ person.sur_name }}</div>
             <label for="b_day">date of birth: </label>
             <div class="personal_info" name="b_day">{{ person.birth_date }}</div>
+            <div class="photo_area">
+                <label for="photo">Photo:</label>
+                <img src="http://{{ request.get_host }}{% get_media_prefix %}{{ person.photo }}" alt="user photo" />
+            </div>
         </div>
         <div class="contact_info">
             <label for="contacts">contacts: </label>
@@ -21,10 +31,6 @@
             </ul>
         </div>
         <div class="lower_part">
-            <div class="bio_area_home">
-                <label for="bio">Bio: </label>
-                <textarea class="personal_info bio_area" name="bio" readonly="readonly">{{ person.bio }}</textarea>
-            </div>
             <div class="x_contact_info">
                 <label for="contacts" class="x_label">other contacts: </label>
                 <ul class="personal_info extra_contact_area" name="contacts">
@@ -33,11 +39,11 @@
                         <li class="contact_address" name="{{title}}">{{address}}</li>
                     {% endfor %}
                 </ul>
+            </div>        
+            <div class="bio_area_home">
+                <label for="bio">Bio: </label>
+                <textarea class="personal_info bio_area" name="bio" readonly="readonly">{{ person.bio }}</textarea>
             </div>
-        </div>
-        <div class="photo_area">
-            <label for="photo">Photo:</label>
-            <img src="http://{{ request.get_host }}{% get_media_prefix %}{{ person.photo }}" alt="user photo" />
         </div>
 
         <hr />
